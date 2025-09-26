@@ -1,56 +1,248 @@
 <style>
-    .search-btn {
-        background-color: #fe424d;
-        color: #fff;
-        border-radius: 25px;
-        padding: 0 1rem 0 1rem;
+:root {
+    --primary-color: #fe424d;
+    --primary-color-dark: #dc3741;
+    --text-dark: #374151;
+    --text-light: #f3f4f6;
+    --border-color: #e5e7eb;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 0.75rem 2rem;
+    font-family: 'Inter', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.navbar .brand {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.navbar .brand i {
+    margin-right: 0.4rem;
+}
+
+.navbar .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.navbar .nav-links a {
+    color: var(--text-dark);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 0.25rem 0.5rem;
+}
+.navbar .nav-links a:hover,
+.navbar .nav-links a.active {
+    color: var(--primary-color);
+}
+.navbar .nav-links a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    border-radius: 4px;
+}
+
+.navbar .search-form {
+    position: relative;
+    max-width: 350px;
+    flex: 1;
+}
+.navbar .search-form input {
+    width: 100%;
+    border-radius: 50px;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1.2rem;
+    transition: all 0.3s;
+}
+.navbar .search-form input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(254,66,77,0.4);
+    border-color: var(--primary-color);
+}
+.navbar .search-form button {
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.4rem 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.navbar .search-form button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.navbar .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+.navbar .auth-buttons a {
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.navbar .auth-buttons a.signup {
+    background-color: var(--primary-color);
+    color: white;
+}
+.navbar .auth-buttons a.signup:hover {
+    background-color: var(--primary-color-dark);
+}
+.navbar .auth-buttons a.login {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+}
+.navbar .auth-buttons a.login:hover {
+    background-color: var(--border-color);
+}
+
+.navbar .hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    z-index: 1001;
+}
+
+.navbar .collapsible-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0.75rem 1rem;
     }
 
-    .search-btn:hover {
-        background-color: #fe424d;
-        color: #fff;
+    .navbar .nav-center,
+    .navbar .auth-buttons,
+    .navbar .search-form {
+        width: 100%;
     }
 
-    .search-btn i {
-        display: inline;
-        margin-right: 0.5rem;
+    .navbar .nav-center {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
-    .search-inp {
-        border-radius: 25px;
-        padding: 0.5rem 3rem 0.5rem 3rem;
-        font-size: 1rem;
+    .navbar .auth-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
     }
+
+    .navbar .auth-buttons a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .search-form input {
+        width: 100%;
+    }
+
+    .navbar .hamburger {
+        display: block;
+        order: 1;
+        margin-left: auto;
+    }
+
+    .navbar .collapsible-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        width: 100%;
+        gap: 1rem;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s;
+        padding: 0 0.5rem;
+        order: 2;
+    }
+
+    .navbar .collapsible-menu.show {
+        max-height: 700px;
+        opacity: 1;
+        padding: 1rem 0.5rem;
+    }
+}
 </style>
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/listings">Explore</a>
 
+<nav class="navbar">
+    <a href="/listings" class="brand"><i class="fa-regular fa-compass"></i>Wanderlust</a>
+
+    <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="collapsibleMenu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    
+    <div class="collapsible-menu" id="collapsibleMenu">
+        <div class="nav-center">
+            <div class="nav-links">
+                <a href="/listings" class="active">Explore</a>
+                <a href="/listings/new">Airbnb your home</a>
             </div>
-            <div class="nabar-nav ms-auto">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2 search-inp" type="search" placeholder="Search Destination"
-                        aria-label="Search">
-                    <button class="btn search-btn" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>Search</button>
-                </form>
-            </div>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/listings/new">Airbnb your home</a>
-                <% if(typeof currUser === 'undefined' || !currUser) {%>
-                    <a class="nav-link active" href="/signup"><b>Sign Up</b></a>
-                    <a class="nav-link" href="/login"><b>Log In</b></a>
-                    <% } %>
-                        <% if(typeof currUser !== 'undefined' && currUser) {%>
-                            <a class="nav-link" href="/logout">Log Out</a>
-                            <% } %>
-            </div>
+
+            <form class="search-form" role="search">
+                <input type="search" placeholder="Search Destination" aria-label="Search">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+
+        <div class="auth-buttons">
+            <% if(!currUser) { %>
+                <a href="/signup" class="signup">Sign Up</a>
+                <a href="/login" class="login">Log In</a>
+            <% } else { %>
+                <a href="/logout" class="login">Log Out</a>
+            <% } %>
         </div>
     </div>
 </nav>
+
+<script>
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.collapsible-menu');
+const icon = hamburger.querySelector('i');
+
+hamburger.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    const expanded = menu.classList.contains('show');
+    hamburger.setAttribute('aria-expanded', expanded);
+
+    if(expanded){
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+    } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    }
+});
+</script>

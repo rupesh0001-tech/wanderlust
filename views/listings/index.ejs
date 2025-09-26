@@ -1,95 +1,165 @@
 <% layout("/layouts/boilerplate") %>
-    <!-- <h3>All Listing</h3> -->
-    <!-- <form method="GET" action="/listings/new">
-            <button>Create new listing</button>
-        </form> -->
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing pools</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-sailboat"></i></div>
-            <p>Boats</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </div>
-        <div class="tax-toggle">
-            <div class="form-check-reverse">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            </div>
-            <div class="form-switch">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after Taxes</label>
-            </div>
-        </div>
-    </div>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+
+<div class="page-container">
+    <div class="listing-grid">
         <% for(let listing of allListing) { %>
-            <a href="/listings/<%= listing._id %>" class="listing-link">
-                <div class="card col listing-card">
-                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height:20rem">
-                    <div class="card-img-overlay">
-                        <div class="guest-favourite">Guest favourite</div>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="listing-card">
+                <div class="img-wrapper">
+                    <img src="<%= listing.image.url %>" alt="listing_image">
+                    <div class="card-overlay">
+                        <span class="badge">Guest favourite</span>
                         <i class="fa-regular fa-heart heart-icon"></i>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b>
-                                <%= listing.title %>
-                            </b>
-                            <br>
-                            &#8377; <%= listing.price.toLocaleString("en-IN") %>/night
-                                <i class="tax-info"> &nbsp;&nbsp; +18% GST</i>
-                        </p>
-                    </div>
                 </div>
-            </a>
-            <% } %>
+                <div class="card-body">
+                    <h3 class="title"><%= listing.title %></h3>
+                    <p class="price">&#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+                        <span class="tax-info">+18% GST</span>
+                    </p>
+                </div>
+            </div>
+        </a>
+        <% } %>
     </div>
-    <script>
-        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-        taxSwitch.addEventListener("click", () => {
-            let taxInfo = document.getElementsByClassName("tax-info");
-            for (info of taxInfo) {
-                if (info.style.display != "inline") {
-                    info.style.display = "inline";
-                } else {
-                    info.style.display = "none";
-                }
-            }
-        });
-    </script>
+</div>
+
+<script>
+let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+if (taxSwitch) {
+    taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for (info of taxInfo) {
+            info.style.display = info.style.display !== "inline" ? "inline" : "none";
+        }
+    });
+}
+</script>
+
+<style>
+/* ---------- GLOBAL ---------- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f5f7;
+    margin: 0;
+    color: #111827;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+}
+
+/* ---------- LISTING GRID ---------- */
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ---------- LISTING CARD ---------- */
+.listing-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.listing-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.listing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Image wrapper */
+.img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid #e5e7eb;
+}
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlay badge + heart */
+.card-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.badge {
+    background-color: #ef4444;
+    color: #fff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.heart-icon {
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.heart-icon:hover {
+    transform: scale(1.2);
+    color: #ef4444;
+}
+
+/* Card body */
+.card-body {
+    padding: 1rem;
+}
+.title {
+    font-size: 1.1rem;
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+}
+.price {
+    font-size: 0.95rem;
+    color: #374151;
+}
+.tax-info {
+    font-size: 0.8rem;
+    color: #6b7280;
+    display: none;
+}
+
+/* ---------- RESPONSIVENESS ---------- */
+@media (max-width: 1024px) {
+    .listing-grid {
+        gap: 1.2rem;
+    }
+}
+@media (max-width: 768px) {
+    .listing-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    .img-wrapper {
+        height: 180px;
+    }
+}
+@media (max-width: 480px) {
+    .listing-grid {
+        grid-template-columns: 1fr;
+    }
+    .img-wrapper {
+        height: 160px;
+    }
+}
+</style>

@@ -1,19 +1,122 @@
 <footer>
-    <div class="f-about">
-        <h4>About Wanderlust</h4>
-        <p>Wanderlust is your premier destination for discovering unique and memorable accommodations around the world. We connect travelers with extraordinary places to stay, from cozy cabins to luxurious villas.</p>
+    <div class="footer-container">
+        <div class="footer-section f-about">
+            <h4>About Wanderlust</h4>
+            <p>Wanderlust is your premier destination for discovering unique and memorable accommodations around the world. We connect travelers with extraordinary places to stay, from cozy cabins to luxurious villas.</p>
+        </div>
+        <div class="footer-section f-contact">
+            <h4>Contact Us</h4>
+            <p>Email: <a href="mailto:info@wanderlust.com">info@wanderlust.com</a></p>
+            <p>Phone: <a href="tel:+15551234567">+1 (555) 123-4567</a></p>
+        </div>
+        <div class="footer-section f-newsletter">
+            <h4>Stay Updated</h4>
+            <p>Subscribe to our newsletter for the latest listings and travel tips.</p>
+            <form action="#" method="POST" class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
     </div>
-    <div class="f-contact">
-        <h4>Contact Us</h4>
-        <p>Email: info@wanderlust.com</p>
-        <p>Phone: +1 (555) 123-4567</p>
-    </div>
-    <div class="f-newsletter">
-        <h4>Stay Updated</h4>
-        <p>Subscribe to our newsletter for the latest listings and travel tips.</p>
-        <form action="#" method="POST">
-            <input type="email" placeholder="Your email address">
-            <button type="submit">Subscribe</button>
-        </form>
+    <div class="footer-bottom">
+        &copy; <%= new Date().getFullYear() %> Wanderlust. All rights reserved.
     </div>
 </footer>
+
+<style>
+/* ---------- FOOTER ---------- */
+footer {
+    background-color: #111827;
+    color: #f3f4f6;
+    padding: 2.5rem 1rem 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 250px;
+}
+
+.footer-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #fe424d;
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #f3f4f6;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-section a:hover {
+    color: #fe424d;
+}
+
+/* Newsletter form */
+.newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.newsletter-form input {
+    flex: 1 1 auto;
+    padding: 0.5rem 0.8rem;
+    border-radius: 25px;
+    border: none;
+    font-size: 0.9rem;
+}
+.newsletter-form input:focus {
+    outline: none;
+    box-shadow: 0 0 6px rgba(254, 66, 77, 0.3);
+}
+.newsletter-form button {
+    background-color: #fe424d;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+.newsletter-form button:hover {
+    background-color: #dc3741;
+}
+
+/* Footer bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .newsletter-form {
+        flex-direction: column;
+    }
+    .newsletter-form input, .newsletter-form button {
+        width: 100%;
+    }
+}
+</style>

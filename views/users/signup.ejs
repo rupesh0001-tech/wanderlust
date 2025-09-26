@@ -1,27 +1,90 @@
 <% layout("/layouts/boilerplate") %>
-    <div class="row mt-3">
-        <h1 class="col-8 offset-3">SignUp on Wnaderlust</h1>
-        <div class="col-8 offset-3">
-            <form action="/signup" method="POST" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input name="username" id="username" type="text" placeholder="enter username" class="form-control"
-                        required />
-                    <div class="valid-feedback">Looks Great!</div>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input name="email" id="email" type="email" placeholder="enter username" class="form-control"
-                        required />
-                    <div class="valid-feedback">Looks Great!</div>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" type="password" placeholder="enter username"
-                        class="form-control" required />
-                    <div class="valid-feedback">Looks Great!</div>
-                </div>
-                <button class="btn btn-success">SignUp</button>
-            </form>
-        </div>
+
+<style>
+/* Center container */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f3f4f6;
+    padding: 2rem 1rem;
+}
+
+/* Card box */
+.signup-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Title */
+.signup-card h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #374151;
+    font-size: 1.8rem;
+}
+
+/* Inputs */
+.signup-card .form-control {
+    border-radius: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid #d1d5db;
+}
+
+/* Button */
+.signup-card .btn-success {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    background-color: #fe424d;
+    border-color: #fe424d;
+    transition: background 0.3s;
+}
+
+.signup-card .btn-success:hover {
+    background-color: #dc3741;
+    border-color: #dc3741;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .signup-card {
+        padding: 1.5rem;
+    }
+
+    .signup-card h1 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<div class="signup-container">
+    <div class="signup-card">
+        <h1>SignUp on Wanderlust</h1>
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input name="username" id="username" type="text" placeholder="Enter username" class="form-control" required />
+                <div class="valid-feedback">Looks Great!</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input name="email" id="email" type="email" placeholder="Enter email" class="form-control" required />
+                <div class="valid-feedback">Looks Great!</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" id="password" type="password" placeholder="Enter password" class="form-control" required />
+                <div class="valid-feedback">Looks Great!</div>
+            </div>
+            <button class="btn btn-success">SignUp</button>
+        </form>
     </div>
+</div>
